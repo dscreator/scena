@@ -131,7 +131,7 @@ export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "star
   },
   startScreen: {
     greeting:
-      "Strategic customer briefing: key events, insights, and signals that matter. Understand implications fast so you can act with clarity and confidence.",
+      "Strategic customer briefing: key events, insights, and signals that matter.\nUnderstand implications fast so you can act with clarity and confidence.",
     prompts: [],
   },
 };
