@@ -8,6 +8,22 @@ const PORT = Number(process.env.PORT) || 8787;
 app.use(cors({ origin: true }));
 app.use(express.json());
 
+function chatKitEnabled() {
+  const disabled =
+    process.env.CHATKIT_UI === "off" ||
+    process.env.CHATKIT_UI === "0" ||
+    process.env.CHATKIT_UI === "false";
+  if (disabled) {
+    return false;
+  }
+  return Boolean(process.env.CHATKIT_WORKFLOW_ID?.trim());
+}
+
+app.get("/api/config", (_req, res) => {
+  res.setHeader("Cache-Control", "no-store");
+  res.json({ chatKit: chatKitEnabled() });
+});
+
 const MAX_MESSAGE_LEN = 16000;
 
 function extractOutputText(data) {
@@ -39,7 +55,7 @@ function extractOutputText(data) {
 }
 
 app.post("/api/chat", async (req, res) => {
-  const apiKey = process.env.OPENAI_API_KEY;
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
   if (!apiKey) {
     res.status(500).json({ error: "Missing OPENAI_API_KEY on the server." });
     return;
@@ -85,8 +101,8 @@ app.post("/api/chat", async (req, res) => {
 });
 
 app.post("/api/chatkit/session", async (req, res) => {
-  const apiKey = process.env.OPENAI_API_KEY;
-  const workflowId = process.env.CHATKIT_WORKFLOW_ID;
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  const workflowId = process.env.CHATKIT_WORKFLOW_ID?.trim();
 
   if (!apiKey) {
     res.status(500).json({ error: "Missing OPENAI_API_KEY on the server." });

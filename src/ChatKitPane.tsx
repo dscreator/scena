@@ -80,7 +80,6 @@ export default function ChatKitPane() {
 
   return (
     <>
-      <p className="app-sub app-mode-hint">ChatKit (workflow + domain key)</p>
       {kitError ? (
         <div className="app-error" role="alert">
           <strong>ChatKit error:</strong> {kitError}

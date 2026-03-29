@@ -41,9 +41,6 @@ export default function SimpleChat() {
 
   return (
     <>
-      <p className="app-sub app-mode-hint">
-        Simple chat — server uses <code>OPENAI_API_KEY</code> only (no ChatKit domain key)
-      </p>
       {error ? (
         <div className="app-error" role="alert">
           <strong>Error:</strong> {error}
