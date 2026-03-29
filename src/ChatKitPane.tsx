@@ -80,9 +80,9 @@ export default function ChatKitPane() {
           </button>
         </div>
       ) : null}
-      <main className="app-main">
+      <div className="chatkit-stage">
         <ChatKit control={control} className="chatkit-panel" />
-      </main>
+      </div>
     </>
   );
 }

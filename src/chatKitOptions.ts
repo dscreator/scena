@@ -1,8 +1,7 @@
 import type { ChatKitOptions } from "@openai/chatkit";
 
 /**
- * Shared ChatKit appearance + composer config (hosted Agent Builder).
- * Wired into `useChatKit()` in `ChatKitPane.tsx` alongside `api.getClientSecret`.
+ * ChatKit UI for Customer Briefing Agent (hosted Agent Builder + getClientSecret).
  */
 export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "startScreen"> = {
   theme: {
@@ -16,7 +15,7 @@ export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "star
       },
     },
     typography: {
-      baseSize: 16,
+      baseSize: 14,
       fontFamily:
         '"OpenAI Sans", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif',
       fontFamilyMono:
@@ -82,7 +81,7 @@ export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "star
     },
   },
   composer: {
-    placeholder: "Which strategic customer would you like to be briefed about?",
+    placeholder: "Type the name of one or more customers you would like a briefing on",
     attachments: {
       enabled: true,
       maxCount: 5,
@@ -106,9 +105,33 @@ export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "star
         pinned: false,
       },
     ],
+    models: [
+      {
+        id: "gpt-5",
+        label: "gpt-5",
+        description: "Balanced intelligence",
+        default: true,
+      },
+      {
+        id: "gpt-4.1",
+        label: "gpt-4.1",
+        description: "Strong general reasoning",
+      },
+      {
+        id: "gpt-4o",
+        label: "gpt-4o",
+        description: "Fast multimodal",
+      },
+      {
+        id: "o4-mini",
+        label: "o4-mini",
+        description: "Efficient deep reasoning",
+      },
+    ],
   },
   startScreen: {
-    greeting: "",
+    greeting:
+      "Strategic customer briefing: key events, insights, and signals that matter. Understand implications fast so you can act with clarity and confidence.",
     prompts: [],
   },
 };

@@ -2,7 +2,7 @@ import { lazy, Suspense, useEffect, useState } from "react";
 import SimpleChat from "./SimpleChat";
 import "./App.css";
 
-const ChatKitPane = lazy(() => import("./ChatKitPane"));
+const AgentHub = lazy(() => import("./AgentHub"));
 
 type UiMode = "loading" | "chatkit" | "simple";
 
@@ -44,11 +44,11 @@ export default function App() {
         <Suspense
           fallback={
             <main className="app-main">
-              <p className="app-sub">Loading ChatKit…</p>
+              <p className="app-sub">Loading agents…</p>
             </main>
           }
         >
-          <ChatKitPane />
+          <AgentHub />
         </Suspense>
       ) : (
         <SimpleChat />
