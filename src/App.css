@@ -74,3 +74,114 @@
   border: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
 }
+
+.app-mode-hint {
+  margin: 0;
+  padding: 0.35rem 1.5rem 0;
+  font-size: 0.8125rem;
+  color: #7c8188;
+}
+
+.app-mode-hint code {
+  font-size: 0.75rem;
+  padding: 0.1em 0.35em;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.06);
+}
+
+.simple-chat-main {
+  align-items: flex-start;
+}
+
+.simple-chat {
+  width: min(100%, 440px);
+  min-height: 480px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: #161a22;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  overflow: hidden;
+}
+
+.simple-chat-messages {
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  min-height: 360px;
+}
+
+.simple-chat-empty {
+  margin: 0;
+  color: #7c8188;
+  font-size: 0.875rem;
+  align-self: center;
+  padding: 2rem 1rem;
+}
+
+.simple-chat-bubble {
+  max-width: 92%;
+  padding: 0.55rem 0.75rem;
+  border-radius: 10px;
+  font-size: 0.875rem;
+  line-height: 1.45;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.simple-chat-bubble--user {
+  align-self: flex-end;
+  background: #2d3748;
+  color: #e8eaed;
+}
+
+.simple-chat-bubble--assistant {
+  align-self: flex-start;
+  background: rgba(255, 255, 255, 0.06);
+  color: #e8eaed;
+}
+
+.simple-chat-form {
+  display: flex;
+  gap: 0.5rem;
+  padding: 0.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.simple-chat-input {
+  flex: 1;
+  min-width: 0;
+  padding: 0.55rem 0.85rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: #0f1115;
+  color: #e8eaed;
+  font: inherit;
+  font-size: 0.875rem;
+}
+
+.simple-chat-input:focus {
+  outline: 2px solid rgba(100, 150, 255, 0.35);
+  outline-offset: 1px;
+}
+
+.simple-chat-send {
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  border: none;
+  background: #e8eaed;
+  color: #0f1115;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.simple-chat-send:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
