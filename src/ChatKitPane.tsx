@@ -1,5 +1,6 @@
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { useMemo, useState } from "react";
+import { chatKitUiOptions } from "./chatKitOptions";
 import "./App.css";
 
 const USER_STORAGE_KEY = "scena_chatkit_user_id";
@@ -39,7 +40,7 @@ export default function ChatKitPane() {
   const [kitError, setKitError] = useState<string | null>(null);
 
   const { control } = useChatKit({
-    theme: { colorScheme: "dark" },
+    ...chatKitUiOptions,
     api: {
       async getClientSecret(_existing) {
         setKitError(null);

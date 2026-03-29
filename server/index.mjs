@@ -129,6 +129,13 @@ app.post("/api/chatkit/session", async (req, res) => {
       body: JSON.stringify({
         workflow: { id: workflowId },
         user,
+        chatkit_configuration: {
+          file_upload: {
+            enabled: true,
+            max_files: 5,
+            max_file_size: 10,
+          },
+        },
       }),
     });
 
