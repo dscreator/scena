@@ -1,13 +1,6 @@
-import type { ChatKitOptions } from "@openai/chatkit";
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
 import { useMemo, useState } from "react";
 import "./App.css";
-
-/** Matches index.html meta name="openai-chatkit-domain-key" */
-function readChatKitDomainKeyFromIndex(): string {
-  const el = document.querySelector('meta[name="openai-chatkit-domain-key"]');
-  return el?.getAttribute("content")?.trim() ?? "";
-}
 
 const USER_STORAGE_KEY = "scena_chatkit_user_id";
 
@@ -43,13 +36,11 @@ function getOrCreateUserId(): string {
 
 export default function ChatKitPane() {
   const userId = useMemo(() => getOrCreateUserId(), []);
-  const domainKey = useMemo(() => readChatKitDomainKeyFromIndex(), []);
   const [kitError, setKitError] = useState<string | null>(null);
 
   const { control } = useChatKit({
     theme: { colorScheme: "dark" },
     api: {
-      domainKey,
       async getClientSecret(_existing) {
         setKitError(null);
         const res = await fetch("/api/chatkit/session", {
@@ -71,7 +62,7 @@ export default function ChatKitPane() {
         }
         return data.client_secret;
       },
-    } as ChatKitOptions["api"],
+    },
     onError: (detail) => {
       const msg = detail.error?.message ?? String(detail.error);
       setKitError(msg);
