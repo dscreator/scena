@@ -1,5 +1,5 @@
 import { ChatKit, useChatKit } from "@openai/chatkit-react";
-import { useMemo, useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import { chatKitUiOptions } from "./chatKitOptions";
 import "./App.css";
 
@@ -35,9 +35,26 @@ function getOrCreateUserId(): string {
   }
 }
 
+function downloadMarkdown(filename: string, markdown: string) {
+  const blob = new Blob([markdown], { type: "text/markdown;charset=utf-8" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  a.rel = "noopener";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  URL.revokeObjectURL(url);
+}
+
 export default function ChatKitPane() {
   const userId = useMemo(() => getOrCreateUserId(), []);
   const [kitError, setKitError] = useState<string | null>(null);
+  const [threadId, setThreadId] = useState<string | null>(null);
+  const [briefingReady, setBriefingReady] = useState(false);
+  const [exporting, setExporting] = useState(false);
+  const [exportError, setExportError] = useState<string | null>(null);
 
   const { control } = useChatKit({
     ...chatKitUiOptions,
@@ -68,7 +85,51 @@ export default function ChatKitPane() {
       const msg = detail.error?.message ?? String(detail.error);
       setKitError(msg);
     },
+    onThreadChange: (detail) => {
+      setThreadId(detail.threadId);
+      setBriefingReady(false);
+      setExportError(null);
+    },
+    /** Prior thread from history can be exported once items are loaded. */
+    onThreadLoadEnd: () => {
+      setBriefingReady(true);
+    },
+    /** New replies: enable download after the assistant finishes streaming. */
+    onResponseEnd: () => {
+      setBriefingReady(true);
+    },
   });
+
+  const handleDownloadBriefing = useCallback(async () => {
+    if (!threadId || exporting) {
+      return;
+    }
+    setExportError(null);
+    setExporting(true);
+    try {
+      const res = await fetch("/api/chatkit/export", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ threadId }),
+      });
+      const data = (await res.json()) as { markdown?: string; filename?: string; error?: string };
+      if (!res.ok) {
+        throw new Error(data.error ?? `Export failed (${res.status})`);
+      }
+      if (typeof data.markdown !== "string") {
+        throw new Error("No briefing content returned.");
+      }
+      const name =
+        typeof data.filename === "string" && data.filename.length > 0
+          ? data.filename
+          : `customer-briefing-${threadId.slice(-8)}.md`;
+      downloadMarkdown(name, data.markdown);
+    } catch (e) {
+      setExportError(e instanceof Error ? e.message : "Download failed.");
+    } finally {
+      setExporting(false);
+    }
+  }, [threadId, exporting]);
 
   return (
     <>
@@ -80,8 +141,37 @@ export default function ChatKitPane() {
           </button>
         </div>
       ) : null}
+      {exportError ? (
+        <div className="app-error" role="alert">
+          <strong>Export error:</strong> {exportError}
+          <button type="button" className="app-error-dismiss" onClick={() => setExportError(null)}>
+            Dismiss
+          </button>
+        </div>
+      ) : null}
       <div className="chatkit-stage">
-        <ChatKit control={control} className="chatkit-panel" />
+        <div className="chatkit-row">
+          <div className="chatkit-panel-wrap">
+            <ChatKit control={control} className="chatkit-panel" />
+          </div>
+          <aside className="chatkit-aside" aria-label="Briefing export">
+            <button
+              type="button"
+              className="chatkit-download-btn"
+              disabled={!threadId || !briefingReady || exporting}
+              onClick={() => void handleDownloadBriefing()}
+            >
+              {exporting ? "Preparing…" : "Download briefing"}
+            </button>
+            <p className="chatkit-aside-hint">
+              {!threadId
+                ? "Start a conversation to enable export."
+                : !briefingReady
+                  ? "Available after the assistant finishes a reply."
+                  : "Saves the thread as a Markdown file (opens in Word or any editor)."}
+            </p>
+          </aside>
+        </div>
       </div>
     </>
   );

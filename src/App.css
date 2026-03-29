@@ -78,6 +78,77 @@
   box-sizing: border-box;
 }
 
+.chatkit-row {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 1rem;
+  width: 100%;
+  min-height: 0;
+  flex: 1;
+}
+
+@media (min-width: 800px) {
+  .chatkit-row {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 1.25rem;
+  }
+}
+
+.chatkit-panel-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  justify-content: stretch;
+}
+
+.chatkit-aside {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: stretch;
+}
+
+@media (min-width: 800px) {
+  .chatkit-aside {
+    width: 11.5rem;
+    padding-top: 0.25rem;
+  }
+}
+
+.chatkit-download-btn {
+  padding: 0.6rem 1rem;
+  border-radius: 10px;
+  border: 1px solid #111827;
+  background: #111827;
+  color: #ffffff;
+  font: inherit;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.chatkit-download-btn:hover:not(:disabled) {
+  background: #374151;
+  border-color: #374151;
+}
+
+.chatkit-download-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.chatkit-aside-hint {
+  margin: 0;
+  font-size: 0.75rem;
+  line-height: 1.45;
+  color: #6b7280;
+  max-width: 14rem;
+}
+
 .chatkit-panel {
   width: 100%;
   max-width: none;

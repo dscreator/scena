@@ -1,6 +1,10 @@
 import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import {
+  fetchAllChatKitThreadItems,
+  threadItemsToMarkdown,
+} from "./chatkitThreadExport.mjs";
 
 const app = express();
 const PORT = Number(process.env.PORT) || 8787;
@@ -153,6 +157,35 @@ app.post("/api/chatkit/session", async (req, res) => {
   } catch (err) {
     const message = err instanceof Error ? err.message : "Unknown error";
     res.status(500).json({ error: message });
+  }
+});
+
+app.post("/api/chatkit/export", async (req, res) => {
+  const apiKey = process.env.OPENAI_API_KEY?.trim();
+  if (!apiKey) {
+    res.status(500).json({ error: "Missing OPENAI_API_KEY on the server." });
+    return;
+  }
+
+  const threadId =
+    typeof req.body?.threadId === "string" && req.body.threadId.length > 0
+      ? req.body.threadId
+      : null;
+
+  if (!threadId) {
+    res.status(400).json({ error: "Missing threadId" });
+    return;
+  }
+
+  try {
+    const items = await fetchAllChatKitThreadItems(apiKey, threadId);
+    const markdown = threadItemsToMarkdown(items, "Customer briefing");
+    res.json({ markdown, filename: `customer-briefing-${threadId.slice(-8)}.md` });
+  } catch (err) {
+    const status =
+      err && typeof err === "object" && typeof err.status === "number" ? err.status : 500;
+    const message = err instanceof Error ? err.message : "Export failed";
+    res.status(status).json({ error: message });
   }
 });
 
