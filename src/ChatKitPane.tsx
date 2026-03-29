@@ -59,7 +59,12 @@ export default function ChatKitPane() {
   const { control } = useChatKit({
     ...chatKitUiOptions,
     api: {
-      async getClientSecret(_existing) {
+      async getClientSecret(existing) {
+        // Reusing the same secret keeps the hosted session + thread; minting a new
+        // session here on refresh breaks sends (see ChatKit auth guides).
+        if (existing) {
+          return existing;
+        }
         setKitError(null);
         const res = await fetch("/api/chatkit/session", {
           method: "POST",

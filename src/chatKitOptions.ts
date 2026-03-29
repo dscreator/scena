@@ -87,47 +87,8 @@ export const chatKitUiOptions: Pick<ChatKitOptions, "theme" | "composer" | "star
       maxCount: 5,
       maxSize: 10_485_760,
     },
-    tools: [
-      {
-        id: "search_docs",
-        label: "Search docs",
-        shortLabel: "Docs",
-        placeholderOverride: "Search documentation",
-        icon: "book-open",
-        pinned: true,
-      },
-      {
-        id: "search_web",
-        label: "Search web",
-        shortLabel: "Web",
-        placeholderOverride: "Search the web",
-        icon: "globe",
-        pinned: false,
-      },
-    ],
-    models: [
-      {
-        id: "gpt-5",
-        label: "gpt-5",
-        description: "Balanced intelligence",
-        default: true,
-      },
-      {
-        id: "gpt-4.1",
-        label: "gpt-4.1",
-        description: "Strong general reasoning",
-      },
-      {
-        id: "gpt-4o",
-        label: "gpt-4o",
-        description: "Fast multimodal",
-      },
-      {
-        id: "o4-mini",
-        label: "o4-mini",
-        description: "Efficient deep reasoning",
-      },
-    ],
+    // Omit composer.tools / composer.models unless IDs match your Agent Builder
+    // workflow; mismatched tool or model IDs can block sends with no visible error.
   },
   startScreen: {
     greeting:
