@@ -1,0 +1,76 @@
+.app {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.app-error {
+  margin: 0 1.5rem;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background: rgba(180, 60, 60, 0.2);
+  border: 1px solid rgba(255, 120, 120, 0.35);
+  color: #fecaca;
+  font-size: 0.875rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.5rem 1rem;
+}
+
+.app-error strong {
+  color: #fca5a5;
+}
+
+.app-error-dismiss {
+  margin-left: auto;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  background: rgba(0, 0, 0, 0.25);
+  color: inherit;
+  cursor: pointer;
+  font: inherit;
+  font-size: 0.8125rem;
+}
+
+.app-error-dismiss:hover {
+  background: rgba(0, 0, 0, 0.4);
+}
+
+.app-header {
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: linear-gradient(180deg, #161a22 0%, #12151c 100%);
+}
+
+.app-title {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.app-sub {
+  margin: 0.35rem 0 0;
+  font-size: 0.875rem;
+  color: #9aa0a6;
+}
+
+.app-main {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  padding: 1rem;
+  min-height: 0;
+}
+
+.chatkit-panel {
+  width: min(100%, 420px);
+  min-height: 560px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+}
