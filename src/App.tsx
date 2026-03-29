@@ -33,7 +33,7 @@ export default function App() {
   return (
     <div className="app">
       <header className="app-header">
-        <h1 className="app-title">Scena</h1>
+        <h1 className="app-title">SCE AI Agents</h1>
         <p className="app-sub">Chat powered by OpenAI</p>
       </header>
       {mode === "loading" ? (

@@ -8,9 +8,9 @@
   margin: 0 1.5rem;
   padding: 0.75rem 1rem;
   border-radius: 8px;
-  background: rgba(180, 60, 60, 0.2);
-  border: 1px solid rgba(255, 120, 120, 0.35);
-  color: #fecaca;
+  background: #fef2f2;
+  border: 1px solid #fecaca;
+  color: #991b1b;
   font-size: 0.875rem;
   display: flex;
   flex-wrap: wrap;
@@ -19,29 +19,29 @@
 }
 
 .app-error strong {
-  color: #fca5a5;
+  color: #7f1d1d;
 }
 
 .app-error-dismiss {
   margin-left: auto;
   padding: 0.25rem 0.6rem;
   border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  background: rgba(0, 0, 0, 0.25);
-  color: inherit;
+  border: 1px solid #fca5a5;
+  background: #ffffff;
+  color: #991b1b;
   cursor: pointer;
   font: inherit;
   font-size: 0.8125rem;
 }
 
 .app-error-dismiss:hover {
-  background: rgba(0, 0, 0, 0.4);
+  background: #fee2e2;
 }
 
 .app-header {
   padding: 1.25rem 1.5rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: linear-gradient(180deg, #161a22 0%, #12151c 100%);
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
 .app-title {
@@ -49,12 +49,13 @@
   font-size: 1.35rem;
   font-weight: 600;
   letter-spacing: -0.02em;
+  color: #111827;
 }
 
 .app-sub {
   margin: 0.35rem 0 0;
   font-size: 0.875rem;
-  color: #9aa0a6;
+  color: #4b5563;
 }
 
 .app-main {
@@ -69,20 +70,24 @@
 .chatkit-stage {
   flex: 1;
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
   align-items: stretch;
-  padding: 0 1rem 1rem;
+  padding: 0 0.75rem 0.75rem;
   min-height: 0;
   width: 100%;
+  box-sizing: border-box;
 }
 
 .chatkit-panel {
-  width: min(100%, 480px);
-  min-height: 560px;
+  width: 100%;
+  max-width: none;
+  min-height: 440px;
+  height: min(72vh, 640px);
+  max-height: min(72vh, 640px);
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
 }
 
 .agent-hub {
@@ -99,10 +104,15 @@
   width: 100%;
 }
 
+.agent-hub--chat .chatkit-stage {
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+}
+
 .agent-hub-intro {
   margin: 0 0 1.25rem;
   font-size: 0.9375rem;
-  color: #b8bcc4;
+  color: #4b5563;
   text-align: center;
   max-width: 36rem;
 }
@@ -111,9 +121,9 @@
   margin: 0 0 1rem;
   padding: 0.65rem 1rem;
   border-radius: 8px;
-  background: rgba(251, 191, 36, 0.12);
-  border: 1px solid rgba(251, 191, 36, 0.35);
-  color: #fcd34d;
+  background: #fffbeb;
+  border: 1px solid #fcd34d;
+  color: #92400e;
   font-size: 0.875rem;
   max-width: 36rem;
   text-align: center;
@@ -124,7 +134,9 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1rem;
   width: 100%;
-  max-width: 900px;
+  max-width: none;
+  padding: 0 0.5rem;
+  box-sizing: border-box;
 }
 
 .agent-card {
@@ -135,27 +147,27 @@
   gap: 0.65rem;
   padding: 1.35rem 1rem;
   border-radius: 14px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: linear-gradient(165deg, #1c2230 0%, #141820 100%);
-  color: #e8eaed;
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  color: #111827;
   cursor: pointer;
   font: inherit;
   transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
 }
 
 .agent-card:hover {
-  border-color: rgba(255, 255, 255, 0.22);
+  border-color: #d1d5db;
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .agent-card--primary:hover {
-  border-color: rgba(52, 211, 153, 0.45);
-  box-shadow: 0 10px 32px rgba(52, 211, 153, 0.08);
+  border-color: #34d399;
+  box-shadow: 0 8px 24px rgba(16, 185, 129, 0.15);
 }
 
 .agent-card--soon {
-  opacity: 0.92;
+  opacity: 0.95;
 }
 
 .agent-card-icon {
@@ -165,13 +177,13 @@
   width: 4.5rem;
   height: 4.5rem;
   border-radius: 14px;
-  background: rgba(255, 255, 255, 0.06);
-  color: #c4c9d4;
+  background: #e5e7eb;
+  color: #374151;
 }
 
 .agent-card--primary .agent-card-icon {
-  color: #a7f3d0;
-  background: rgba(52, 211, 153, 0.12);
+  color: #047857;
+  background: #d1fae5;
 }
 
 .agent-icon-svg {
@@ -188,7 +200,7 @@
 .agent-card-desc {
   font-size: 0.8125rem;
   line-height: 1.45;
-  color: #8b919c;
+  color: #6b7280;
 }
 
 .agent-hub-toolbar {
@@ -197,29 +209,29 @@
   gap: 1rem;
   flex-wrap: wrap;
   padding: 0.75rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(0, 0, 0, 0.2);
+  border-bottom: 1px solid #e5e7eb;
+  background: #ffffff;
 }
 
 .agent-hub-back {
   padding: 0.4rem 0.75rem;
   border-radius: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
-  background: rgba(255, 255, 255, 0.06);
-  color: #e8eaed;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
   font: inherit;
   font-size: 0.875rem;
   cursor: pointer;
 }
 
 .agent-hub-back:hover {
-  background: rgba(255, 255, 255, 0.1);
+  background: #f3f4f6;
 }
 
 .agent-hub-toolbar-title {
   font-size: 0.9375rem;
   font-weight: 600;
-  color: #e8eaed;
+  color: #111827;
 }
 
 .agent-hub-loading {
@@ -244,9 +256,9 @@
   display: flex;
   flex-direction: column;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  background: #161a22;
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
@@ -262,7 +274,7 @@
 
 .simple-chat-empty {
   margin: 0;
-  color: #7c8188;
+  color: #6b7280;
   font-size: 0.875rem;
   align-self: center;
   padding: 2rem 1rem;
@@ -280,21 +292,21 @@
 
 .simple-chat-bubble--user {
   align-self: flex-end;
-  background: #2d3748;
-  color: #e8eaed;
+  background: #111827;
+  color: #f9fafb;
 }
 
 .simple-chat-bubble--assistant {
   align-self: flex-start;
-  background: rgba(255, 255, 255, 0.06);
-  color: #e8eaed;
+  background: #f3f4f6;
+  color: #111827;
 }
 
 .simple-chat-form {
   display: flex;
   gap: 0.5rem;
   padding: 0.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-top: 1px solid #e5e7eb;
 }
 
 .simple-chat-input {
@@ -302,9 +314,9 @@
   min-width: 0;
   padding: 0.55rem 0.85rem;
   border-radius: 999px;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  background: #0f1115;
-  color: #e8eaed;
+  border: 1px solid #d1d5db;
+  background: #ffffff;
+  color: #111827;
   font: inherit;
   font-size: 0.875rem;
 }
